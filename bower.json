@@ -1,0 +1,22 @@
+{
+  "name": "iris-polymer-schedule-editor",
+  "description": "schedule editor for administrator ARM",
+  "main": "iris-schedule-editor.html",
+  "moduleType": [],
+  "keywords": [
+    "schedule",
+    "administrator"
+  ],
+  "authors": [
+    "SS"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

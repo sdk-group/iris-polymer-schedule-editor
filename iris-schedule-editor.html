@@ -1,0 +1,61 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="iris-schedule-editor">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <div id="schedule-view">
+      <template is="dom-repeat" items="[[slots]]">
+        <span class="editable-slot">[[item.state]]</span>
+      </template>
+    </div>
+  </template>
+  <script>
+    'use strict'
+    Polymer({
+      is: 'iris-schedule-editor',
+      properties: {
+        schedule: {
+          type: Array,
+          notify: true
+        },
+        slotLength: {
+          type: Number,
+          value: 60 * 10 //10 minutes
+        }
+
+      },
+      observers: ['prepareSlots(schedule,slotLength)'],
+      ready() {
+        console.log(this.schedule);
+
+      },
+      prepareSlots() {
+        console.log(this.slotLength);
+        let slots = [];
+        _.forEach(this.schedule, (chunk) => {
+          let line = chunk.data[0];
+          let start = line[0];
+          let end = line[1];
+          let prev = false;
+
+          for (let i = start; i < end; i += this.slotLength) {
+            if (prev !== false) {
+              slots.push({
+                data: [prev, i],
+                state: chunk.state
+              });
+            }
+            prev = i;
+
+          }
+        });
+        this.set('slots', slots)
+      }
+    });
+  </script>
+</dom-module>
